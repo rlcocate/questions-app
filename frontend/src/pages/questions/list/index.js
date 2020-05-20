@@ -82,7 +82,7 @@ export default function QuestionList() {
                 <Link className="button" onClick={createQuestion} to="/questions/new">Cadastrar nova pergunta</Link>
             </header>
             <h1>Perguntas</h1>
-            <div title='Ordenar registros por data de criação...' className
+            <div title='Ordenar registros por data de criação...'
                 style={{ cursor: 'pointer' }} onClick={(e) => {
                     setSort('creationDate')
                 }}>
