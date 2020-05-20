@@ -32,7 +32,7 @@ export default function AnswersList(req) {
     function like(questionId, liked) {
         try {
             const service = new AnswerService('answers');
-            service.like(questionId, liked).then(res => {                
+            service.like(questionId, liked).then(res => {
                 setAnswers(res.data);
                 setLiked(liked);
 
@@ -73,7 +73,7 @@ export default function AnswersList(req) {
         <div className="container">
             <header>
                 <img src={logoImg} alt="Respostas" />
-                <button disabled={answering} className="button" onClick={createAnswer}>Inserir nova resposta</button>
+                <button disabled={answering} className="button new-button" onClick={createAnswer}>Inserir nova resposta</button>
             </header>
             <h1>Respostas</h1>
             <ul>
@@ -107,7 +107,8 @@ export default function AnswersList(req) {
                         value={user}
                         onChange={e => setUser(e.target.value || '')}
                     />
-                    <button className="button" type="submit">Enviar</button>
+                    <button className="button send-button" type="submit">Enviar</button>
+                    <button className="button cancel-button" onClick={clearFieldsNewAnswer}>Cancelar</button>
                 </form>
             </div>}
             <Link className="back-link" to="/">

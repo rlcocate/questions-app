@@ -28,6 +28,7 @@
 .container h1 {
     margin-top: 80px;
     margin-bottom: 24px;
+    color: #7DEDBF;
 }
 
 .container ul {
@@ -111,3 +112,24 @@
 .answer-user {
     font-size: 0.9rem;
 }
+.container .new-button {
+    width: 30%;
+    position: absolute;
+    right: 40px;
+  }  
+  .container form button {
+    position: relative;
+    right: auto;
+    left: auto;
+  }
+   
+  .container form .send-button {
+    width: 30%;
+  }
+  
+  .container form .cancel-button {
+    width: 30%;
+    margin-left: 8px;
+    margin-top: 18px;
+  }
+  
