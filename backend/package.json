@@ -1,0 +1,46 @@
+{
+  "name": "questions-app",
+  "version": "1.0.0",
+  "description": "Questions App",
+  "main": "src/main/index.js",
+  "scripts": {
+    "start": "node src/main/index.js",
+    "test": "jest --verbose --noStackTrace --colors --passWithNoTests --runInBand",
+    "test:unit": "npm test -- --watch -c jest-unit-config.js",
+    "test:integration": "npm test -- --watch -c jest-integration-config.js",
+    "test:staged": "npm test -- --findRelatedTests --silent",
+    "test:ci": "npm test -- --coverage --silent"
+  },
+  "eslint": {
+    "env": [
+      "jest"
+    ]
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint",
+      "npm run test:staged"
+    ]
+  },
+  "husky": {
+    "hooks": {
+
+    }
+  },
+  "author": "Rodrigo Luiz Cocate",
+  "license": "ISC",
+  "devDependencies": {
+    "@shelf/jest-mongodb": "^1.1.5",
+    "eslint": "^7.0.0",
+    "husky": "^4.2.5",
+    "jest": "^26.0.1",
+    "lint-staged": "^10.2.2",
+    "supertest": "^4.0.2"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "fast-glob": "^3.2.2",
+    "mongodb": "^3.5.7",
+    "validator": "^13.0.0"
+  }
+}

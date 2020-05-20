@@ -1,0 +1,169 @@
+{
+	"info": {
+		"_postman_id": "b9d1ee40-e5c2-45ee-bbbe-ce5eac40ea5f",
+		"name": "Questions App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Questions",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/api/questions",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"api",
+								"questions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"Qual o primeiro dia da semana?\",\r\n\t\"user\": \"rodrigo.cocate\",\r\n\t\"creationDate\": \"2020-05-17T16:22\",\r\n\t\"like\": 1,\r\n\t\"total_answers\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/api/questions",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"api",
+								"questions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Like",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/api/questions?questionId=5ec1d6834fad94348819d3a0&liked=1",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"api",
+								"questions"
+							],
+							"query": [
+								{
+									"key": "questionId",
+									"value": "5ec1d6834fad94348819d3a0"
+								},
+								{
+									"key": "liked",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Answers",
+			"item": [
+				{
+					"name": "ListByQuestionId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/api/answers/5ec187a159411539a47fe1b5",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"api",
+								"answers",
+								"5ec187a159411539a47fe1b5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"Segunda feira\",\r\n\t\"user\": \"rodrigo.cocate\",\r\n\t\"creationDate\": \"2020-05-17T19:21\",\r\n\t\"like\": 0,\r\n\t\"questionId\": \"5ec1d6834fad94348819d3a0\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/api/answers",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"api",
+								"answers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Like",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/api/answers?answerId=5ec1d6a14fad94348819d3a1&liked=1",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"api",
+								"answers"
+							],
+							"query": [
+								{
+									"key": "answerId",
+									"value": "5ec1d6a14fad94348819d3a1"
+								},
+								{
+									"key": "liked",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
