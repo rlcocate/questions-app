@@ -1,0 +1,134 @@
+.container {
+    width: 100%;
+    max-width: 1180px;
+    padding: 0 30px;
+    margin: 32px auto;
+}
+
+.container header {
+    display: flex;
+    align-items: center;
+}
+/* 
+.container header span {
+    font-size: 20px;
+    margin-left: 24px;
+} */
+
+.container header img {
+    height: 96px;
+}
+
+.container header a {
+    width: 260px;
+    margin-left: auto;
+    margin-top: 0;
+}
+
+.container h1 {
+    margin-top: 80px;
+    margin-bottom: 24px;
+}
+
+.container ul {
+    display: block;
+    align-items: center;
+    list-style: none;
+}
+.container ul li {
+    background: #fff;
+    padding: 24px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.container ul li button {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    border: 0;
+    background: #fff;
+}
+
+.container ul li button:hover {
+    opacity: 0.7;
+}
+
+.container ul li strong {
+    display: block;
+    margin-bottom: 16px;
+    color: #41414d;
+}
+
+.container ul li p + strong {
+    margin-top: 32px;
+}
+
+.container ul li p {
+    color: #737380;
+    line-height: 21px;
+    font-size: 16px;
+}
+
+.card.question {
+    display: grid;
+    grid-template-areas: "image details liked answer";
+    grid-template-columns: 70px 1.15fr 15px 15px;
+    padding: 1rem;
+}
+
+.question-image {
+    grid-area: image;
+}
+.question-image img {
+    max-width: 50px;
+}
+.question-details {
+    grid-area: details;
+    color: #616161;
+}
+.question-total-answers {
+    position: absolute;
+    bottom: 0;
+    right: 65px;
+}
+.question-liked {
+    grid-area: liked;
+    position: absolute;
+    right: 90px;
+    bottom: 10px;
+}
+.question-answer {
+    grid-area: answer;
+    position: absolute;
+    right: 60px;
+    bottom: 10px;
+}
+.question-text {
+    font-size: 18px;
+    font-weight: 500;
+}
+.question-user {
+    font-size: 0.9rem;
+}
+
+.search {
+    width: 40%;
+    height: 50px;
+    color: #333;
+    border: 1px solid #dcdcd6;
+    border-radius: 8px;
+    padding: 0 24px;
+    margin-left: 8px;
+}
+
+.not-answered {
+    width: 25%;
+    height: 50px;
+    color: #333;
+    border: 1px solid #dcdcd6;
+    border-radius: 8px;
+    padding: 0 24px; 
+    margin-left: 8px;
+    margin-right: 8px;
+}
