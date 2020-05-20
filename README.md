@@ -31,4 +31,5 @@ Execute o aplicativo em modo de desenvolvimento.
 
 Existe um arquivo de coleções das requisições. Para realização de testes poderá ser importado este arquivo no Postman:
 
+- backend\postman_environment.json
 - backend\postman-collection.json
