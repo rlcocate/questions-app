@@ -33,7 +33,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"text\": \"Qual o primeiro dia da semana?\",\r\n\t\"user\": \"rodrigo.cocate\",\r\n\t\"creationDate\": \"2020-05-17T16:22\",\r\n\t\"like\": 1,\r\n\t\"total_answers\": 0\r\n}",
+							"raw": "{\r\n    \"text\": \"Quando fará sua primeira pergunta?\",\r\n\t\"user\": \"rodrigo.cocate\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -59,7 +59,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "{{apiUrl}}/api/questions?questionId=5ec1d6834fad94348819d3a0&liked=1",
+							"raw": "{{apiUrl}}/api/questions?questionId=5ec561fd1fb164312c7181a2&liked=1",
 							"host": [
 								"{{apiUrl}}"
 							],
@@ -70,7 +70,7 @@
 							"query": [
 								{
 									"key": "questionId",
-									"value": "5ec1d6834fad94348819d3a0"
+									"value": "5ec561fd1fb164312c7181a2"
 								},
 								{
 									"key": "liked",
@@ -93,14 +93,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{apiUrl}}/api/answers/5ec187a159411539a47fe1b5",
+							"raw": "{{apiUrl}}/api/answers/5ec561fd1fb164312c7181a2",
 							"host": [
 								"{{apiUrl}}"
 							],
 							"path": [
 								"api",
 								"answers",
-								"5ec187a159411539a47fe1b5"
+								"5ec561fd1fb164312c7181a2"
 							]
 						}
 					},
@@ -113,7 +113,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"text\": \"Segunda feira\",\r\n\t\"user\": \"rodrigo.cocate\",\r\n\t\"creationDate\": \"2020-05-17T19:21\",\r\n\t\"like\": 0,\r\n\t\"questionId\": \"5ec1d6834fad94348819d3a0\"\r\n}",
+							"raw": "{\r\n    \"text\": \"O mais breve possível!\",\r\n\t\"user\": \"Nadia\",\r\n\t\"questionId\": \"5ec561fd1fb164312c7181a2\"  \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -139,7 +139,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "{{apiUrl}}/api/answers?answerId=5ec1d6a14fad94348819d3a1&liked=1",
+							"raw": "{{apiUrl}}/api/answers?answerId=5ec561fd1fb164312c7181a2&liked=1",
 							"host": [
 								"{{apiUrl}}"
 							],
@@ -150,7 +150,7 @@
 							"query": [
 								{
 									"key": "answerId",
-									"value": "5ec1d6a14fad94348819d3a1"
+									"value": "5ec561fd1fb164312c7181a2"
 								},
 								{
 									"key": "liked",
