@@ -15,7 +15,7 @@ export default class AnswerService extends BaseService {
         return await super.create(data);
     }
 
-    async like(questionId, liked){
-        return await super.like(questionId, liked);
+    async like(answerId, liked){
+        return await super.like(answerId, liked);
     }
 }

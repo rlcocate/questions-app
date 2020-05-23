@@ -43,13 +43,12 @@ export default function QuestionList() {
                     creationDate: 'creationDate'
                 };
                 const sortProperty = cols[col];
-                const sorted = [...filtered].sort((a, b) => b[sortProperty] - a[sortProperty]);
-                result = sorted;
+                result = [...filtered].sort((a, b) => b[sortProperty] - a[sortProperty]);
                 setQuestions(result);
             };
             sortResults(sort);
         });
-    }, [search, notAnsw, sort]);
+    }, [search, notAnsw, sort, liked]);
 
     function createQuestion() {
         history.push('/questions/new');
@@ -62,7 +61,7 @@ export default function QuestionList() {
     async function like(questionId, liked) {
         try {
             const service = new QuestionService('questions');
-            await service.like(questionId, liked).then(res => setLiked(liked));
+            await service.like(questionId, liked).then(res => setLiked({ questionId, liked }));
         } catch (error) {
             console.log(error);
             alert(`${error}`)
@@ -105,6 +104,7 @@ export default function QuestionList() {
                                 onClick={async () => await like(question._id, !question.like ? 1 : 0)}>
                                 <FaThumbsUp size={18} color='#393939' />
                             </div>
+
                             <div title='Ver respostas...' className='question-answer'
                                 style={{ cursor: 'pointer' }} onClick={() => listAnswers(question._id)}>
                                 <FaReply size={18} color='#393939' />

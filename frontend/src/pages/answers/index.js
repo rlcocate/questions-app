@@ -8,38 +8,32 @@ import img from '../../assets/qa.png';
 
 import './styles.css';
 
-export default function AnswersList(req) {
+export default function AnswersList(obj) {
     const [answers, setAnswers] = useState([]);
-
     const [text, setText] = useState('');
     const [user, setUser] = useState('');
     const [answering, setAnswering] = useState(false);
-    const [liked, setLiked] = useState(0);
+    const [liked, setLiked] = useState(-1);
+    const [commited, setCommited] = useState(false);
 
-    const questionId = req.match.params.questionId;
+    const questionId = obj.match.params.questionId;
 
-    useEffect(() => { listAnswers() });
-
-    async function listAnswers() {
+    useEffect(() => {
         const service = new AnswerService('answers');
         try {
             service.index(questionId).then(res => setAnswers(res.data));
         } catch (error) {
             console.log(error);
         }
-    }
+    }, [questionId, liked, commited]);
 
-    function like(questionId, liked) {
+    async function like(answerId, liked) {
         try {
             const service = new AnswerService('answers');
-            service.like(questionId, liked).then(res => {
-                setAnswers(res.data);
-                setLiked(liked);
-
-            });
+            await service.like(answerId, liked).then(res => { setLiked({ answerId, liked }); });
         } catch (error) {
             console.log(error);
-            alert(error)
+            alert(`${error}`)
         }
     }
 
@@ -51,6 +45,7 @@ export default function AnswersList(req) {
             const service = new AnswerService('answers');
             await service.create(data).then(res => {
                 clearFieldsNewAnswer();
+                setCommited(true);
                 alert('Resposta gravada com sucesso!');
             });
         } catch (error) {
@@ -87,8 +82,9 @@ export default function AnswersList(req) {
                                 <div className='answer-text'>{answer.text}</div>
                                 <div className='answer-user'>{answer.user}</div>
                             </div>
-                            <div title={((liked === answer.like && !answer.like) || !liked) ? 'Curtir...' : 'Descurtir...'} className='answer-liked'
-                                style={{ cursor: 'pointer', opacity: ((liked === answer.like && !answer.like) || !liked) ? '0.5' : '1' }} onClick={() => like(answer._id, !answer.like)}>
+                            <div title={(!answer.like ? 'Curtir...' : 'Descurtir...')} className='answer-liked'
+                                style={{ cursor: 'pointer', opacity: (!answer.like ? '0.5' : '1') }}
+                                onClick={async () => await like(answer._id, !answer.like ? 1 : 0)}>
                                 <FaThumbsUp size={18} color='#393939' />
                             </div>
                         </div>
