@@ -48,10 +48,10 @@ module.exports = class AnswersRouter {
         try {
             const { answerId, liked } = req.query;
             if (!answerId) {
-                throw new MissingParamError('answerId');
+                return HttpResponse.badRequest(new MissingParamError('answerId'));
             };
             if (!liked) {
-                throw new MissingParamError('liked');
+                return HttpResponse.badRequest(new MissingParamError('liked'));
             };
             await this.answersUseCase.like(answerId, liked);
             return HttpResponse.ok({ '_id': answerId, 'like': liked });
