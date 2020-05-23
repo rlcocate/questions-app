@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { FaReply, FaSort, FaThumbsUp } from 'react-icons/fa';
+import { FaReply, FaThumbsUp } from 'react-icons/fa';
 
 import QuestionService from '../../../services/question-service';
 import logoImg from '../../../assets/logo.png';
@@ -14,7 +14,7 @@ export default function QuestionList() {
     const [liked, setLiked] = useState(-1);
     const [search, setSearch] = useState('');
     const [notAnsw, setNotAnsw] = useState(1);
-    const [sort, setSort] = useState('_id');
+    const [sort, setSort] = useState('asc');
 
     const keyPress = (e) => {
         let key = e.charCode || e.keyCode || 0;
@@ -38,14 +38,13 @@ export default function QuestionList() {
             }
             let result = filtered;
             const sortResults = col => {
-                const cols = {
-                    _id: '_id',
-                    creationDate: 'creationDate'
-                };
-                const sortProperty = cols[col];
-                result = [...filtered].sort((a, b) => b[sortProperty] - a[sortProperty]);
+                if (col === 'asc') {
+                    result = [...filtered].sort((a, b) => { return new Date(a.creationDate) - new Date(b.creationDate) });
+                } else {
+                    result = [...filtered].sort((a, b) => { return new Date(b.creationDate) - new Date(a.creationDate) });
+                }
                 setQuestions(result);
-            };
+            }
             sortResults(sort);
         });
     }, [search, notAnsw, sort, liked]);
@@ -69,24 +68,19 @@ export default function QuestionList() {
     }
 
     return (
-        <div className="container">
+        <div className='container'>
             <header>
-                <img src={logoImg} alt="Perguntas e Respostas" />
-                <input name="search" className="search" placeholder="Faça sua pesquisa..."
+                <img src={logoImg} alt='Perguntas e Respostas' />
+                <input name='search' className='search' placeholder='Faça sua pesquisa...'
                     value={search} onChange={e => setSearch(e.target.value)} onKeyPress={keyPress}></input>
-                <select className="not-answered" onChange={notAnswered}>
-                    <option value="1">Todas</option>
-                    <option value="0">Não respondidas</option>
+                <select className='not-answered' onChange={notAnswered}>
+                    <option value='1'>Todas</option>
+                    <option value='0'>Não respondidas</option>
                 </select>
-                <Link className="button" onClick={createQuestion} to="/questions/new">Cadastrar nova pergunta</Link>
+                <button className='sort-button' onClick={() => setSort(sort === 'asc' ? 'desc' : 'asc')}>Ordenar por data</button>
+                <Link className='button' onClick={createQuestion} to='/questions/new'>Cadastrar nova pergunta</Link>
             </header>
             <h1>Perguntas</h1>
-            <div title='Ordenar registros por data de criação...'
-                style={{ cursor: 'pointer' }} onClick={(e) => {
-                    setSort('creationDate')
-                }}>
-                <FaSort size={24} color='#393939' />
-            </div>
             <ul>
                 {questions.map(question => (
                     <li key={question._id}>
@@ -96,7 +90,19 @@ export default function QuestionList() {
                             </div>
                             <div className='question-details'>
                                 <div className='question-text'>{question.text}</div>
-                                <div className='question-user'>{question.user}</div>
+                                <div className='question-user'>
+                                    por <b>{question.user}</b><span>
+                                        em {Intl.DateTimeFormat('pt-BR', {
+                                    day: 'numeric',
+                                    month: 'numeric',
+                                    year: 'numeric'
+                                }).format(Date.parse(question.creationDate))}</span>
+                                as <span>{Intl.DateTimeFormat('pt-BR', {
+                                    hour: 'numeric',
+                                    minute: 'numeric'
+                                }).format(Date.parse(question.creationDate))}
+                                    </span>
+                                </div>
                                 <div className='question-total-answers'>{question.total_answers} resposta(s)</div>
                             </div>
                             <div title={(!question.like ? 'Curtir...' : 'Descurtir...')} className='question-liked'

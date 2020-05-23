@@ -9,11 +9,6 @@
     display: flex;
     align-items: center;
 }
-/* 
-.container header span {
-    font-size: 20px;
-    margin-left: 24px;
-} */
 
 .container header img {
     height: 96px;
@@ -111,6 +106,7 @@
 }
 .answer-user {
     font-size: 0.9rem;
+    font-style: italic;
 }
 .container .new-button {
     width: 15%;

@@ -78,7 +78,20 @@ export default function AnswersList(obj) {
                             </div>
                             <div className='answer-details'>
                                 <div className='answer-text'>{answer.text}</div>
-                                <div className='answer-user'>{answer.user}</div>
+                                <div className='answer-user'>
+                                por <b>{answer.user}</b><span>
+                                        em {Intl.DateTimeFormat('pt-BR', {
+                                    day: 'numeric',
+                                    month: 'numeric',
+                                    year: 'numeric'
+                                }).format(Date.parse(answer.creationDate))}</span>
+                                as <span>{Intl.DateTimeFormat('pt-BR', {
+                                    hour: 'numeric',
+                                    minute: 'numeric'
+                                }).format(Date.parse(answer.creationDate))}
+                                    </span>
+                                    
+                                    </div>
                             </div>
                             <div title={(!answer.like ? 'Curtir...' : 'Descurtir...')} className='answer-liked'
                                 style={{ cursor: 'pointer', opacity: (!answer.like ? '0.5' : '1') }}
