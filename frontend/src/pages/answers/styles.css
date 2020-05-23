@@ -113,9 +113,10 @@
     font-size: 0.9rem;
 }
 .container .new-button {
-    width: 30%;
+    width: 15%;
     position: absolute;
-    right: 40px;
+    /* margin: 16px 0 0;*/
+    margin-left: 150px; 
   }  
   .container form button {
     position: relative;

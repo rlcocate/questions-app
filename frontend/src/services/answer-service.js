@@ -1,4 +1,5 @@
 import BaseService from './base/base-service';
+import api from '../config/api';
 
 export default class AnswerService extends BaseService {
     constructor(page, questionId) {
@@ -15,7 +16,10 @@ export default class AnswerService extends BaseService {
         return await super.create(data);
     }
 
-    async like(answerId, liked){
-        return await super.like(answerId, liked);
+    async like(answerId, liked) {
+        await api.put(`answers?answerId=${answerId}&liked=${liked}`)
+            .then(response => {
+                return response.data;
+            });
     }
 }

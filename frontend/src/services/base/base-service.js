@@ -19,11 +19,4 @@ export default class BaseService {
             return response.data;
         });
     }
-
-    async like(answerId, liked) {
-        await api.put(`${this.page}?answerId=${answerId}&liked=${liked}`)
-            .then(response => {
-                return response.data;
-            });
-    }
 }

@@ -14,7 +14,6 @@ export default function AnswersList(obj) {
     const [user, setUser] = useState('');
     const [answering, setAnswering] = useState(false);
     const [liked, setLiked] = useState(-1);
-    const [commited, setCommited] = useState(false);
 
     const questionId = obj.match.params.questionId;
 
@@ -25,7 +24,7 @@ export default function AnswersList(obj) {
         } catch (error) {
             console.log(error);
         }
-    }, [questionId, liked, commited]);
+    }, [questionId, liked, answering]);
 
     async function like(answerId, liked) {
         try {
@@ -45,7 +44,6 @@ export default function AnswersList(obj) {
             const service = new AnswerService('answers');
             await service.create(data).then(res => {
                 clearFieldsNewAnswer();
-                setCommited(true);
                 alert('Resposta gravada com sucesso!');
             });
         } catch (error) {
@@ -94,6 +92,7 @@ export default function AnswersList(obj) {
             {answering && <div className='new-answer'>
                 <form onSubmit={newAnswer}>
                     <textarea
+                        autoFocus={answering}
                         placeholder="Insira aqui sua resposta..."
                         value={text}
                         onChange={e => setText(e.target.value || '')}
