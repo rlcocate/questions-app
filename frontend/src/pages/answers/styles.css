@@ -11,7 +11,7 @@
 }
 
 .container header img {
-    height: 96px;
+    height: 64px;
 }
 
 .container header a {
@@ -21,9 +21,9 @@
 }
 
 .container h1 {
-    margin-top: 80px;
-    margin-bottom: 24px;
-    color: #7DEDBF;
+    margin-top: 40px;
+    margin-bottom: 14px;
+    color: #4ADE96;
 }
 
 .container ul {
