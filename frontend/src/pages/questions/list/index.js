@@ -24,29 +24,36 @@ export default function QuestionList() {
     }
 
     const notAnswered = (e) => {
-        setNotAnsw(Number(e.target.value))
+        setNotAnsw(Number(e.target.value));
     }
 
     useEffect(() => {
-        const service = new QuestionService('questions');
-        service.index().then(res => {
-            const questions = res.data;
-            let filtered = questions;
-            filtered = questions.filter((s => String(s.text).includes(search)));
-            if (notAnsw === 0) {
-                filtered = filtered.filter((s => String(s.total_answers).includes(notAnsw)));
-            }
-            let result = filtered;
-            const sortResults = col => {
-                if (col === 'asc') {
-                    result = [...filtered].sort((a, b) => { return new Date(a.creationDate) - new Date(b.creationDate) });
-                } else {
-                    result = [...filtered].sort((a, b) => { return new Date(b.creationDate) - new Date(a.creationDate) });
-                }
-                setQuestions(result);
-            }
-            sortResults(sort);
-        });
+        try {
+            const service = new QuestionService('questions');
+            service.index()
+                .then(res => {
+                    const questions = res.data;
+                    let filtered = questions;
+                    filtered = questions.filter((s => String(s.text.toLowerCase()).includes(search.toLowerCase())));
+                    if (notAnsw === 0) {
+                        filtered = filtered.filter((s => String(s.total_answers).includes(notAnsw)));
+                    }
+                    let result = filtered;
+                    const sortResults = col => {
+                        if (col === 'asc') {
+                            result = [...filtered].sort((a, b) => { return new Date(a.creationDate) - new Date(b.creationDate) });
+                        } else {
+                            result = [...filtered].sort((a, b) => { return new Date(b.creationDate) - new Date(a.creationDate) });
+                        }
+                        setQuestions(result);
+                    }
+                    sortResults(sort);
+                })
+                .catch(err => { checkError(err) });
+        } catch (error) {
+            console.log(error);
+            alert(`Ocorreu um erro! ${error}`);
+        }
     }, [search, notAnsw, sort, liked]);
 
     function createQuestion() {
@@ -60,10 +67,21 @@ export default function QuestionList() {
     async function like(questionId, liked) {
         try {
             const service = new QuestionService('questions');
-            await service.like(questionId, liked).then(res => setLiked({ questionId, liked }));
+            await service.like(questionId, liked)
+                .then(res => setLiked({ questionId, liked }))
+                .catch(err => { checkError(this.err); });
         } catch (error) {
             console.log(error);
-            alert(`${error}`)
+            alert(`Ocorreu um erro! ${error}`);
+        }
+    }
+
+    function checkError(err) {
+        if (err.message === 'Network Error') {
+            alert(`Atenção!! Verifique se o servidor ou o banco de dados estão no ar.`);
+        }
+        else {
+            alert(`${err.response.status} - ${err.response.data.error}`)
         }
     }
 

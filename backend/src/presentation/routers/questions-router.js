@@ -13,7 +13,7 @@ module.exports = class QuestionRouter {
             return HttpResponse.ok(questions);
         } catch (error) {
             // console.error(error)
-            return HttpResponse.serverError();
+            return HttpResponse.serverError(error);
         }
     }
 

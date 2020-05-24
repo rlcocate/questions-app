@@ -19,9 +19,13 @@ module.exports = class HttpResponse {
     }
 
     static serverError(error) {
+        const server = new ServerError();
         return {
             statusCode: 500,
-            body: new ServerError().message + ' - ' + error
+            body: {
+                error: new String().concat(server.message, (error !== null ? ' - ' + error : ''))
+            }
+             
         };
     }
 }

@@ -4,6 +4,7 @@ import { FiArrowLeft } from 'react-icons/fi';
 
 import api from '../../../config/api';
 import logoImg from '../../../assets/logo.png';
+
 import './styles.css';
 
 export default function QuestionForm() {
@@ -17,12 +18,24 @@ export default function QuestionForm() {
         event.preventDefault();
         const data = { text, user };
         try {
-            await api.post('questions', data)
-            history.push('/');
-            alert('Pergunta gravada com sucesso!');
+            api.post('questions', data)
+                .then(res => {
+                    history.push('/');
+                    alert('Pergunta gravada com sucesso!');
+                })
+                .catch(err => { checkError(err) });
         } catch (error) {
             console.log(error)
-            alert(error);
+            alert(`${error}`);
+        }
+    }
+
+    function checkError(err) {
+        if (err.message === 'Network Error') {
+            alert(`Atenção!! Verifique se o servidor ou o banco de dados estão no ar.`);
+        }
+        else {
+            alert(`${err.response.status} - ${err.response.data.error}`)
         }
     }
 

@@ -10,16 +10,14 @@ module.exports = class AnswersRouter {
     async index(req) {
         try {
             const { questionId } = req.params;
-
-            if (questionId == undefined) {
+            if (!questionId) {
                 return HttpResponse.badRequest(new MissingParamError('questionId'));
             }
-
             const answers = await this.answersUseCase.list(questionId);
             return HttpResponse.ok(answers);
         } catch (error) {
             console.error(error)
-            return HttpResponse.serverError();
+            return HttpResponse.serverError(error);
         }
     }
 

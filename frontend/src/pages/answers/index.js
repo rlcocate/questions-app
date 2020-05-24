@@ -19,20 +19,20 @@ export default function AnswersList(obj) {
 
     useEffect(() => {
         const service = new AnswerService('answers');
-        try {
-            service.index(questionId).then(res => setAnswers(res.data));
-        } catch (error) {
-            console.log(error);
-        }
+        service.index(questionId)
+            .then(res => setAnswers(res.data))
+            .catch(err => { checkError(err) });
     }, [questionId, liked, answering]);
 
     async function like(answerId, liked) {
         try {
             const service = new AnswerService('answers');
-            await service.like(answerId, liked).then(res => { setLiked({ answerId, liked }); });
+            await service.like(answerId, liked)
+                .then(res => { setLiked({ answerId, liked }); })
+                .catch(err => { checkError(err) });
         } catch (error) {
             console.log(error);
-            alert(`${error}`)
+            alert(`Ocorreu um erro! ${error}`);
         }
     }
 
@@ -42,13 +42,15 @@ export default function AnswersList(obj) {
         const data = { text, user, questionId };
         try {
             const service = new AnswerService('answers');
-            await service.create(data).then(res => {
-                clearFieldsNewAnswer();
-                alert('Resposta gravada com sucesso!');
-            });
+            await service.create(data)
+                .then(res => {
+                    clearFieldsNewAnswer();
+                    alert('Resposta gravada com sucesso!');
+                })
+                .catch(err => { checkError(err) });
         } catch (error) {
             console.log(error)
-            alert(error);
+            alert(`Ocorreu um erro! ${error}`);
         }
     }
 
@@ -60,6 +62,15 @@ export default function AnswersList(obj) {
         setText('');
         setUser('');
         setAnswering(false);
+    }
+
+    function checkError(err) {
+        if (err.message === 'Network Error') {
+            alert(`Atenção!! Verifique se o servidor ou o banco de dados estão no ar.`);
+        }
+        else {
+            alert(`${err.response.status} - ${err.response.data.error}`)
+        }
     }
 
     return (
@@ -79,7 +90,7 @@ export default function AnswersList(obj) {
                             <div className='answer-details'>
                                 <div className='answer-text'>{answer.text}</div>
                                 <div className='answer-user'>
-                                por <b>{answer.user}</b><span>
+                                    por <b>{answer.user}</b><span>
                                         em {Intl.DateTimeFormat('pt-BR', {
                                     day: 'numeric',
                                     month: 'numeric',
@@ -90,8 +101,8 @@ export default function AnswersList(obj) {
                                     minute: 'numeric'
                                 }).format(Date.parse(answer.creationDate))}
                                     </span>
-                                    
-                                    </div>
+
+                                </div>
                             </div>
                             <div title={(!answer.like ? 'Curtir...' : 'Descurtir...')} className='answer-liked'
                                 style={{ cursor: 'pointer', opacity: (!answer.like ? '0.5' : '1') }}
