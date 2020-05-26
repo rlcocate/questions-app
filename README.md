@@ -61,3 +61,13 @@ Existe um arquivo de coleções das requisições. Para realização de testes p
 
 - backend\postman_environment.json
 - backend\postman-collection.json
+
+Testes
+------------------------------------------------
+
+Foi utilizado o Jest para realização de alguns testes unitários e de integração.
+
+Poderá executar testes da seguinte forma:
+* Unitários: npm run test:unit
+* Integração: npm run test:integration
+
