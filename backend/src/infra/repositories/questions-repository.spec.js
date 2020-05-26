@@ -1,6 +1,6 @@
 const MongoHelper = require('../helpers/mongo-helper');
 const QuestionsRepository = require('./questions-repository');
-let questionModel;
+let questionModel; 
 
 const makeSut = (() => {
     return new QuestionsRepository();

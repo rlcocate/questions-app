@@ -51,7 +51,6 @@ describe('LoadAnswers Repository', () => {
     });
 
     test('Should return an valid Id when an answer is created.', async () => {
-        const sut = makeSut();
         const question = {
             text: 'Vamos criar uma nova pergunta?',
             user: 'Francisco',
@@ -74,7 +73,6 @@ describe('LoadAnswers Repository', () => {
     });
 
     test('Should update total answers of an exist a question.', async () => {
-        const sut = makeSut();
         const question = {
             text: 'Vamos criar uma nova pergunta?',
             user: 'Francisco',
@@ -96,7 +94,6 @@ describe('LoadAnswers Repository', () => {
     });
 
     test('Should mark as a liked an exist answer.', async () => {
-        const sut = makeSut();
         const question = {
             text: 'Vamos criar uma nova pergunta?',
             user: 'Francisco',
